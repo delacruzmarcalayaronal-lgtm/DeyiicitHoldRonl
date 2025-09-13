@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitación Especial</title>
+  <style>
+    /* Fondo de video */
+    .fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+      z-index: -1;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .titulo h1 {
+      font-size: 42px;
+      color: #ff69b4;
+      text-shadow: 
+        0 0 10px #ff1493,
+        0 0 20px #ff69b4,
+        0 0 30px #ff00ff,
+        0 0 40px #ff1493;
+      animation: brillo 2s infinite alternate;
+      margin: 20px;
+    }
+
+    @keyframes brillo {
+      from { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493; }
+      to   { text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff1493; }
+    }
+
+    .botones {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    p {
+      cursor: pointer;
+      font-size: 32px;
+      padding: 20px 40px;
+      border-radius: 25px;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    /* Botón "No" */
+    #no {
+      background: #0d47a1;
+      color: #fff;
+      box-shadow: 0 0 20px #2196f3, 0 0 40px #00e5ff, 0 0 60px #64b5f6;
+      animation: neonNo 2s infinite alternate;
+    }
+
+    @keyframes neonNo {
+      from { box-shadow: 0 0 20px #2196f3, 0 0 40px #64b5f6; }
+      to   { box-shadow: 0 0 40px #00e5ff, 0 0 60px #2196f3; }
+    }
+
+    /* Botón "Sí" */
+    #siBtn {
+      background: #ff1493;
+      color: #fff;
+      box-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 0 60px #ff00ff;
+      animation: neonSi 2s infinite alternate;
+    }
+
+    @keyframes neonSi {
+      from { box-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493; }
+      to   { box-shadow: 0 0 40px #ff00ff, 0 0 60px #ff69b4; }
+    }
+
+    p:hover {
+      transform: scale(1.1);
+    }
+
+    #si {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #si h2 {
+      color: #ffb6c1;
+      font-size: 32px;
+      text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 0 60px #ff00ff;
+      animation: brillo 2s infinite alternate;
+    }
+
+    .corazones {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .corazones img {
+      width: 120px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #ff69b4;
+      animation: latido 1.2s infinite;
+    }
+
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Video final centrado */
+    #videoFinal {
+      margin-top: 25px;
+      display: none;
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ff69b4;
+    }
+
+    /* Responsivo para móviles */
+    @media (max-width: 600px) {
+      h1 { font-size: 28px; }
+      p { font-size: 22px; padding: 15px 25px; }
+      .corazones img { width: 90px; }
+      #videoFinal { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo con VIDEO -->
+  <video autoplay loop muted playsinline class="fondo">
+    <source src="imagenes/176198-855206384.mp4" type="video/mp4">
+    Tu navegador no soporta videos de fondo.
+  </video>
+
+  <div class="titulo">
+    <h1>¿Quieres tener una cita conmigo? 🌌✨</h1>
+  </div>
+
+  <div class="botones">
+    <p id="no">No ❌</p>
+    <p id="siBtn">Sí 💖</p>
+  </div>
+
+  <div id="si">
+    <h2>¡Gracias por aceptar, Deysi! 🥰✨</h2>
+    <div class="corazones">
+      <img src="imagenes/corazon.png" alt="Corazón 1">
+      <img src="imagenes/corazon.png" alt="Corazón 2">
+      <img src="imagenes/corazon.png" alt="Corazón 3">
+    </div>
+    <br>
+    <!-- 🎬 Video que aparece al aceptar -->
+    <video id="videoFinal" autoplay loop muted playsinline>
+      <source src="imagenes/final.mp4" type="video/mp4">
+      Tu navegador no soporta videos.
+    </video>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('no');
+    const siBtn = document.getElementById('siBtn');
+    const siDiv = document.getElementById('si');
+    const videoFinal = document.getElementById('videoFinal');
+
+    // Botón No que huye
+    noBtn.addEventListener('mouseover', () => {
+      noBtn.style.position = "absolute";
+      noBtn.style.top = Math.random() * (window.innerHeight - 100) + "px";
+      noBtn.style.left = Math.random() * (window.innerWidth - 150) + "px";
+    });
+
+    // Botón Sí que muestra mensaje y VIDEO
+    siBtn.addEventListener('click', () => {
+      siDiv.style.display = "block";
+      videoFinal.style.display = "block";
+      document.querySelector('.botones').style.display = "none";
+    });
+  </script>
+</body>
+</html>
